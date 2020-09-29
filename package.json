@@ -1,0 +1,19 @@
+{
+  "name": "ing4-devops-projet",
+  "version": "0.0.0",
+  "description": "ECE DevOps Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentHardouin/ING4-DevOps-Projet.git"
+  },
+  "author": "Olivier Gomes, Vincent Hardouin & Hugo Pauthier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentHardouin/ING4-DevOps-Projet/issues"
+  },
+  "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Projet#readme"
+}
