@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/VincentHardouin/ING4-DevOps-Projet/issues"
   },
-  "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Projet#readme"
+  "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Projet#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
