@@ -1,7 +1,11 @@
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
+  - 'prettier'
+  - 'plugin:prettier/recommended'
 root: true
 plugins:
   - mocha
+  - prettier
 parserOptions:
   ecmaVersion: 2018
   sourceType: script
@@ -12,9 +16,6 @@ rules:
   arrow-parens:
     - 2
     - always
-  comma-dangle:
-    - 2
-    - "always-multiline"
   computed-property-spacing:
     - 2
     - never
@@ -58,14 +59,8 @@ rules:
   quotes:
     - 2
     - single
-  semi:
-    - 2
-    - always
   space-before-blocks:
     - 2
-  space-before-function-paren:
-    - 2
-    - { anonymous: never, named: never, asyncArrow: ignore }
   space-in-parens:
     - 2
   space-infix-ops:
