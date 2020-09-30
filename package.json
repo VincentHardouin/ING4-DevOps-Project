@@ -4,6 +4,7 @@
   "description": "ECE DevOps Project",
   "main": "index.js",
   "scripts": {
+    "prettify": "prettier --write '**/*.js' && prettier --write ./lib/views --parser glimmer",
     "start": "node ./bin/www",
     "test": "NODE_ENV=test mocha --exit --recursive --reporter=dot"
   },
