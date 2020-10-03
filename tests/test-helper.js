@@ -6,6 +6,14 @@ const expect = chai.expect
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 
+// Sinon
+const sinon = require('sinon')
+chai.use(require('sinon-chai'))
+
+afterEach(function () {
+  sinon.restore()
+})
+
 function catchErr(promiseFn, ctx) {
   return async (...args) => {
     try {
@@ -21,4 +29,5 @@ module.exports = {
   chai,
   expect,
   catchErr,
+  sinon,
 }
