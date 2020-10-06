@@ -13,7 +13,13 @@
     "test:api:path": "NODE_ENV=test mocha --exit --recursive --reporter=dot",
     "test:api:unit": "TEST_DATABASE_URL=bad_url npm run test:api:path -- tests/unit",
     "test:api:integration": "npm run test:api:path -- tests/integration",
-    "test:api:acceptance": "npm run test:api:path -- tests/acceptance"
+    "test:api:acceptance": "npm run test:api:path -- tests/acceptance",
+    "release": "npm run release:minor",
+    "release:patch": "npm version patch -m \"Release v%s\"",
+    "release:minor": "npm version minor -m \"Release v%s\"",
+    "release:major": "npm version major -m \"Release v%s\"",
+    "preversion": "git checkout dev && git pull --rebase && npm test",
+    "postversion": "git push && git checkout master && git pull && git fetch -t && git merge dev --no-edit && git push origin master && git push --tags && git checkout dev"
   },
   "repository": {
     "type": "git",
