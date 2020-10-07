@@ -42,6 +42,7 @@
     "node-sass-middleware": "0.11.0"
   },
   "devDependencies": {
+    "axios": "^0.20.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "eslint": "^7.10.0",
