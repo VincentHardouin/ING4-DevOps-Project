@@ -4,6 +4,7 @@
   "description": "ECE DevOps Project",
   "main": "index.js",
   "scripts": {
+    "configure": "cp sample.env .env && npm ci",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettify": "prettier --write '**/*.js' && prettier --write ./lib/views --parser glimmer",
