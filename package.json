@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "configure": "cp sample.env .env && npm ci",
+    "db:empty": "node scripts/database/empty-database.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettify": "prettier --write '**/*.js' && prettier --write ./lib/views --parser glimmer",
     "start": "node ./bin/www",
     "test": "NODE_ENV=test npm run test:api",
-    "test:api": "status=0; npm run test:api:unit || status=1 ; for dir in $(find tests/* -maxdepth 0 -type d -not -path tests/unit) ; do npm run test:api:path -- $dir || status=1 ; done ; exit $status",
+    "test:api": "npm run test:api:path -- tests",
     "test:api:path": "NODE_ENV=test mocha --exit --recursive --reporter=dot",
-    "test:api:unit": "TEST_DATABASE_URL=bad_url npm run test:api:path -- tests/unit",
+    "test:api:unit": "npm run test:api:path -- tests/unit",
     "test:api:integration": "npm run test:api:path -- tests/integration",
     "test:api:acceptance": "npm run test:api:path -- tests/acceptance",
     "release": "npm run release:minor",
@@ -34,6 +35,7 @@
   },
   "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Projet#readme",
   "dependencies": {
+    "bunyan": "^1.8.14",
     "cookie-parser": "~1.4.4",
     "dayjs": "^1.9.1",
     "debug": "~2.6.9",
@@ -43,7 +45,8 @@
     "http-errors": "~1.6.3",
     "lodash": "^4.17.20",
     "morgan": "~1.9.1",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
     "axios": "^0.20.0",

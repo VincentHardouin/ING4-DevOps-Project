@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+const { expect } = require('../../../test-helper')
 const sinon = require('sinon')
 
 const {
@@ -7,7 +7,7 @@ const {
   getHeadOfChangelog,
   orderPr,
   getTheCommitDate,
-} = require('../release/get-pull-requests-to-release-in-prod')
+} = require('../../../../scripts/release/get-pull-requests-to-release-in-prod')
 
 describe('Unit | Script | GET Pull Request to release in Prod', () => {
   describe('displayPullRequest', () => {
