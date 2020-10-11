@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "configure": "cp sample.env .env && npm ci",
+    "db:empty": "node scripts/database/empty-database.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettify": "prettier --write '**/*.js' && prettier --write ./lib/views --parser glimmer",
