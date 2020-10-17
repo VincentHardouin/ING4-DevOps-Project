@@ -12,7 +12,7 @@ const app = express()
 const expressSwagger = require('express-swagger-generator')(app)
 const config = require('./lib/config')
 
-const createServer = async () => {
+const createServer = () => {
   expressSwagger(config.swagger)
 
   // view engine setup
