@@ -4,8 +4,8 @@ const createServer = require('../../../../app')
 describe('Acceptance | Controller | users-controller', () => {
   let server
 
-  beforeEach(async () => {
-    server = await createServer()
+  beforeEach(() => {
+    server = createServer()
   })
 
   describe('getUser', () => {
