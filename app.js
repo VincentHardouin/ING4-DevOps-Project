@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const sassMiddleware = require('node-sass-middleware')
 
-const indexRouter = require('./lib/application/')
-const usersRouter = require('./lib/application/users')
+const routes = require('./lib/application/')
 const app = express()
 const expressSwagger = require('express-swagger-generator')(app)
 const config = require('./lib/config')
@@ -33,8 +32,7 @@ const createServer = () => {
   )
   app.use(express.static(path.join('./lib/', 'public')))
 
-  app.use('/', indexRouter)
-  app.use('/users', usersRouter)
+  app.use('/', routes)
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
