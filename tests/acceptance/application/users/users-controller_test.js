@@ -30,6 +30,7 @@ describe('Acceptance | Controller | users-controller', () => {
       const response = await request(server)
         .post(url)
         .set('content-type', 'application/json')
+        .set('origin', 'chai')
         .send({ username: 'nidourah', password: 'Pa$$w0rd' })
 
       // then
@@ -45,6 +46,7 @@ describe('Acceptance | Controller | users-controller', () => {
         const response = await request(server)
           .post(url)
           .set('content-type', 'application/json')
+          .set('origin', 'chai')
           .send({ foo: 'bar' })
 
         // then
