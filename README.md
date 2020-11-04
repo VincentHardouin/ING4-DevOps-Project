@@ -3,7 +3,7 @@
 Projet de DevOps ING4
 
 ## Table Of Contents
-1. [Getting Starterd](#getting-started)
+1. [Getting Started](#getting-started)
 2. [Testing](#testing)
 3. [Continuous Integration](#continuous-integration)
 4. [Continuous Delivery](#continuous-delivery)
@@ -40,23 +40,25 @@ npm start
 *6/* Develop and add wonderful features!
 
 ## Testing 
-
+Convinced by the importance of testing our app, we chose [mocha](https://mochajs.org/) and [chai](https://www.chaijs.com/)for testing our app.
 
 ### Why ?
+They are simple to use and have good documentation. 
+Also, to stub and mock we selected [sinon](https://sinonjs.org/)
 ### How ?
 ### What ?
 
 ## Continuous Integration
-Continuous Integration is precious in development, we need to be trust about our code and new features. 
+Continuous Integration is precious in development, we need to be confident about our code and new features. 
 
-For the CI, we adopt [GitHub Actions](https://github.com/features/actions) to run our tests.
+For the CI, we adopted [GitHub Actions](https://github.com/features/actions) to run our tests.
 
 ### Why use GitHub Actions ? 
-We chose to use GitHub Actions because for small project they are simple to use and sufficient. 
+We chose to use GitHub Actions. Indeed, when talking about small project they are simple to use and meet all our needs. Plus, GitHub Actions can easily be scalable to match our project evolution. 
 
 ### What ? 
-To use GitHub Actions, you don't need third party services.
-Simply, you need to create your workflow.
+GitHub Actions, doesn’t need third party services to be used. 
+You simply need to create your workflow.
 
 ### How ?
 First we used nodejs example in [GitHub Docs](https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-nodejs).
@@ -69,7 +71,7 @@ And in `package.json` :
 "lint": "eslint .",
 ```
 
-After, when we added Redis in our code and test this. We need to run CI with Redis. For that, we edited the file to add services  : 
+After having added Redis Database in our code and tested it, we need to run CI with Redis. For that, we edited the file to add services  : 
 ```yaml
     services:
       redis:
@@ -82,22 +84,35 @@ Entire workflow is [here](/.github/workflows/node.js.yml).
 ## Continuous Delivery
 
 ### Why ? 
-This is important to have user feedback, for that we need to delivery new features as often as possible.
+This is important to have user feedback, for that we need to deliver new features as often as possible.
 
 ### How ?
-Put in production is an important task and redundant, then you should automate it.<br>
-For example, there are redundant to fill `CHANGELOG.md` for each version.
+Release is an important and redundant task, this is why you should automate it.<br>
+For example, there are redundant to fill *`CHANGELOG.md`* for each version.
 
 ### What ? 
-To realise that, we used [npm-version](https://docs.npmjs.com/cli/v6/commands/npm-version).
+To achieve that, we used [npm-version](https://docs.npmjs.com/cli/v6/commands/npm-version).
+On hook *`version`*, script get merged pull request titles from last release and add it in *`CHANGELOG.md`*.
+Also, tag using [SemVer](https://semver.org/) is created and pushed to GitHub.
 
+Finally, for deployment, Scalingo triggers master branch changes and deploys it after CI success.
+In our `package.json` :
+```json
+    "release": "npm run release:minor",
+    "release:patch": "npm version patch -m \"Release v%s\"",
+    "release:minor": "npm version minor -m \"Release v%s\"",
+    "release:major": "npm version major -m \"Release v%s\"",
+    "preversion": "git checkout dev && git pull --rebase && npm test",
+    "version": "node scripts/release/get-pull-requests-to-release-in-prod.js && git add package.json CHANGELOG.md",
+    "postversion": "git push && git checkout master && git pull && git fetch -t && git merge dev --no-edit && git push origin master && git push --tags && git checkout dev"
+```
 
 ## Environment 
 
 This project is deployed on [Scalingo](https://scalingo.com/) platform. 
 
 ### Why use Scalingo ? 
-We choosed to use Scalingo as it is french PaaS using [Outscale](https://fr.outscale.com/), a french IaaS. 
+We chose to use Scalingo as it is French PaaS using [Outscale](https://fr.outscale.com/), a French IaaS. 
 Outscale is a subsidiary of Dassault Systèmes.  
 
 Environment | Website
@@ -114,7 +129,7 @@ you can also choose your buildpack if you prefer.
 For Production and Staging, we just add an addon for [Redis](https://redis.io/) Database, and provide environment variable : 
 `DATABASE_REDIS_URL=` 
 
-For Review Apps, we play it different and add `scalingo.json` file to explain the configuration you want.
+For Review Apps, we play it different and add `scalingo.json` file to explain the configuration we want.
 In our case we want Redis addon and provide environment variable. It looks like this :
 ```json
 {
