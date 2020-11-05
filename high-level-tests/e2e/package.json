@@ -1,0 +1,31 @@
+{
+  "name": "ing4-devops-project-e2e",
+  "version": "1.0.0",
+  "description": "Run e2e tests",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser=chrome && exit",
+    "start:api": "cd ../../ && DATABASE_REDIS_URL=redis://localhost:6379 npm run start",
+    "db:empty": "DATABASE_REDIS_URL=redis://localhost:6379 node script/redis-flushall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentHardouin/ING4-DevOps-Project.git"
+  },
+  "keywords": [
+    "e2e"
+  ],
+  "author": "Vincent Hardouin",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/VincentHardouin/ING4-DevOps-Project/issues"
+  },
+  "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Project#readme",
+  "devDependencies": {
+    "cypress": "^5.5.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-cypress": "^2.11.2",
+    "redis": "^3.0.2"
+  }
+}
