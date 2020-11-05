@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Project#readme",
   "devDependencies": {
-    "cypress": "^5.5.0"
+    "cypress": "^5.5.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-cypress": "^2.11.2"
   }
 }
