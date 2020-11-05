@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run --browser=chrome && exit",
-    "start:api": "cd ../../ && npm run start"
+    "start:api": "cd ../../ && DATABASE_REDIS_URL=redis://localhost:6379 npm run start"
   },
   "repository": {
     "type": "git",
