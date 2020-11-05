@@ -4,7 +4,9 @@
   "description": "Run e2e tests",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser=chrome && exit",
+    "start:api": "cd ../../ && npm run start"
   },
   "repository": {
     "type": "git",
