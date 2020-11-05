@@ -24,6 +24,7 @@
   "devDependencies": {
     "cypress": "^5.5.0",
     "eslint": "^7.12.1",
-    "eslint-plugin-cypress": "^2.11.2"
+    "eslint-plugin-cypress": "^2.11.2",
+    "redis": "^3.0.2"
   }
 }
