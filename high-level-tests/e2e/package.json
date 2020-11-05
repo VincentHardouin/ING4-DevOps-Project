@@ -1,0 +1,25 @@
+{
+  "name": "ing4-devops-project-e2e",
+  "version": "1.0.0",
+  "description": "Run e2e tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentHardouin/ING4-DevOps-Project.git"
+  },
+  "keywords": [
+    "e2e"
+  ],
+  "author": "Vincent Hardouin",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/VincentHardouin/ING4-DevOps-Project/issues"
+  },
+  "homepage": "https://github.com/VincentHardouin/ING4-DevOps-Project#readme",
+  "devDependencies": {
+    "cypress": "^5.5.0"
+  }
+}
