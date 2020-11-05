@@ -1,4 +1,4 @@
 beforeEach(() => {
-  cy.exec('redis-cli FLUSHALL');
+  cy.exec('npm run db:empty');
 });
 
