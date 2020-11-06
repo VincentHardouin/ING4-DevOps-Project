@@ -4,7 +4,7 @@
 <p>
   Welcome to {{title}}
 </p>
-<form id="sign-in" action="{{createUserUrl}}" class="form-horizontal form-profile" method="post" role="form" >
+<form id="sign-up" action="{{createUserUrl}}" class="form-horizontal form-profile" method="post" role="form" >
   {{#if success}}
     <div class="alert alert-success alert-dismissible show" role="alert">
       {{success}}
@@ -37,7 +37,7 @@
           {{/each}}
           <div class="form-group">
             <div class="col-md-12 text-right">
-              <button id="btn-sign-in" class="btn btn-primary input-xlarge" type="submit"><i class="fa fa-plus"><span>Ajouter un utilisateur</span></i></button>
+              <button id="btn-sign-up" class="btn btn-primary input-xlarge" type="submit"><i class="fa fa-plus"><span>Ajouter un utilisateur</span></i></button>
             </div>
           </div>
         </div>
