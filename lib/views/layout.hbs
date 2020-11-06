@@ -1,1 +1,62 @@
-{{title}}{{{body}}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projet DevOps</title>
+  <link href="/dist/fontawesome/css/font-awesome.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Static navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <span class="navbar-brand">Projet DevOps</span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/"><span>Accueil</span></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    {{{body}}}
+  </div>
+</div>
+</body>
+
+<script src="/dist/jquery/jquery.min.js"></script>
+<script src="/dist/jquery-validation/jquery.validate.min.js"></script>
+<script src="/dist/bootstrap/js/bootstrap.min.js"></script>
+<script src="/dist/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="/dist/underscore/underscore.js"></script>
+
+<script>
+  $(document).ready(function() {
+    jQuery.validator.setDefaults({
+      errorPlacement: function(error, element) {
+        if(element.parent().hasClass('input-prepend') || element.parent().hasClass('input-append')) {
+          error.insertAfter(element.parent());
+        } else {
+          error.insertAfter(element);
+        }
+      },
+      errorElement: "span",
+      errorClass: "help-block",
+      highlight: function(element) {
+        $(element).closest('.form-group').addClass('has-error');
+      },
+      success: function(element) {
+        $(element).closest('.form-group').removeClass('has-error');
+      }
+    });
+  });
+</script>
+</html>

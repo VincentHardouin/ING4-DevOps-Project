@@ -10,21 +10,52 @@ on:
     branches: [ dev ]
 
 jobs:
-  build:
-
+  build_and_tests:
     runs-on: ubuntu-latest
     if: "! contains(github.event.head_commit.message, 'wip')"
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x]
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 12
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '12'
     - run: npm ci
     - run: npm run lint
     - run: npm test
+      env:
+        DATABASE_REDIS_URL: redis://localhost:6379
+
+  e2e_tests:
+    name: e2e tests
+    runs-on: ubuntu-16.04
+    if: "! contains(github.event.head_commit.message, 'wip')"
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          check-latest: true
+      - run: npm ci
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start:api
+          working-directory: high-level-tests/e2e

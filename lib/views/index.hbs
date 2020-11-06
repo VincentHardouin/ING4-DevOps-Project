@@ -4,3 +4,44 @@
 <p>
   Welcome to {{title}}
 </p>
+<form id="sign-in" action="{{createUserUrl}}" class="form-horizontal form-profile" method="post" role="form" >
+  {{#if success}}
+    <div class="alert alert-success alert-dismissible show" role="alert">
+      {{success}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {{/if}}
+  {{#each errors}}
+    <div class="alert alert-warning alert-dismissible show" role="alert">
+      <strong>{{this.attribute}} : </strong>{{this.message}}
+    </div>
+  {{/each}}
+  <div class='form-profile-attributes'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a aria-controls="collapse-authn-request" aria-expanded="false" data-toggle="collapse" href="#collapse-authn-statement">
+          <h3 class="panel-title"><i class="fa fa-id-card-o"><span>Ajouter un utilisateur</span></i> <i aria-hidden="true" class="indicator fa fa-chevron-circle-down pull-right"></i></h3>
+        </a>
+      </div>
+      <div class="panel-body collapse" id="collapse-authn-statement">
+        <div class="panel-body">
+          {{#each form.fields}}
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="{{this.id}}">{{this.displayName}}</label>
+              <div class="col-sm-9">
+                    <input class="form-control" id="{{this.id}}" name="{{this.id}}" placeholder="Attribute value" type="{{this.type}}" value="{{this.value}}">
+              </div>
+            </div>
+          {{/each}}
+          <div class="form-group">
+            <div class="col-md-12 text-right">
+              <button id="btn-sign-in" class="btn btn-primary input-xlarge" type="submit"><i class="fa fa-plus"><span>Ajouter un utilisateur</span></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

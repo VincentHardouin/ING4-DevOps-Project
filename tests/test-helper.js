@@ -11,8 +11,12 @@ const request = chai.request
 const sinon = require('sinon')
 chai.use(require('sinon-chai'))
 
-afterEach(function () {
+const RedisClient = require('../db/RedisClient')
+
+afterEach(async function () {
   sinon.restore()
+  const db = new RedisClient('test')
+  await db.flushall()
 })
 
 function catchErr(promiseFn, ctx) {

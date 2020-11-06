@@ -16,12 +16,18 @@ git clone git@github.com:VincentHardouin/ING4-DevOps-Project.git && cd ING4-DevO
 npm run configure
 ```
 
-*3/* Start the application
+*3/* Launch [Redis](https://redis.io/) database with docker 
+
+```
+docker-compose up -d 
+```
+
+*4/* Start the application
 
 ```
 npm start
 ```
 
-*4/* Access the application on http://localhost:3000
+*5/* Access the application on http://localhost:3000
 
-*5/* Develop and add wonderful features!
+*6/* Develop and add wonderful features!
