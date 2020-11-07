@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run --browser=chrome && exit",
-    "start:api": "cd ../../ && DATABASE_REDIS_URL=redis://localhost:6379 npm run start",
+    "start:api": "cd ../../ && DATABASE_REDIS_URL=redis://localhost:6379 AUTH_SECRET=cypress npm run start",
     "db:empty": "DATABASE_REDIS_URL=redis://localhost:6379 node script/redis-flushall.js"
   },
   "repository": {

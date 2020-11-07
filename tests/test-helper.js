@@ -11,6 +11,8 @@ const request = chai.request
 const sinon = require('sinon')
 chai.use(require('sinon-chai'))
 
+const databaseBuilder = require('./utils/database-builder/factory/index')
+
 const RedisClient = require('../db/RedisClient')
 
 afterEach(async function () {
@@ -32,6 +34,7 @@ function catchErr(promiseFn, ctx) {
 
 module.exports = {
   chai,
+  databaseBuilder,
   expect,
   catchErr,
   sinon,
