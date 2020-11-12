@@ -40,13 +40,28 @@ npm start
 *6/* Develop and add wonderful features!
 
 ## Testing 
-Convinced by the importance of testing our app, we chose [mocha](https://mochajs.org/) and [chai](https://www.chaijs.com/)for testing our app.
 
 ### Why ?
-They are simple to use and have good documentation. 
-Also, to stub and mock we selected [sinon](https://sinonjs.org/)
+We are convinced by the importance of testing our app to deliver clean code in production.  
+
 ### How ?
+We chose [mocha](https://mochajs.org/) and [chai](https://www.chaijs.com/) to test our app.
+They are simple to use and have good documentation. 
+Also, to stub and mock we selected [sinon](https://sinonjs.org/). 
+
 ### What ?
+We added `mocha`, `chai`, `sinon` inside `devDepencies` in `package.json`. <br>
+To simplify their usage we created `test-helper` which is useful to : 
+- Export all required modules : `chai`, `sinon`, `expect`, `request`
+- Export currying function `catchErr` to test errors
+- Create global `afterEach` to restore stub and empty database 
+
+Moreover, we used multiple types of tests : 
+- **Unit Tests** : to test isolated functions, with stub and mock  
+- **Integration Tests** : to test interaction between multiple modules, for example repositories function with database connection
+- **Acceptance Tests** : to test all integration, for example API endpoint 
+- **e2e Tests**: to test features in real environment like user with [Cypress](https://www.cypress.io/). 
+- **load Tests**: to test load on our application with [Artillery.io](https://artillery.io)
 
 ## Continuous Integration
 Continuous Integration is precious in development, we need to be confident about our code and new features. 
