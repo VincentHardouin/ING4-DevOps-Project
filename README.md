@@ -4,11 +4,12 @@ Projet de DevOps ING4
 
 ## Table Of Contents
 1. [Getting Started](#getting-started)
-2. [Testing](#testing)
-3. [Continuous Integration](#continuous-integration)
-4. [Continuous Delivery](#continuous-delivery)
-5. [Environment](#environment)
-5. [Authors](#authors)
+2. [Code Practice](#code-practice)
+3. [Testing](#testing)
+4. [Continuous Integration](#continuous-integration)
+5. [Continuous Delivery](#continuous-delivery)
+6. [Environment](#environment)
+7. [Authors](#authors)
 
 ## Getting Started 
 
@@ -39,6 +40,33 @@ npm start
 *5/* Access the application on http://localhost:3000
 
 *6/* Develop and add wonderful features!
+
+## Code practice 
+
+### Pair Programing
+
+We think that pair programing and mob programing are more efficient than one person programing 
+and others review. 
+
+With small delay like this project, it's also quicker and easily with this practice.  
+ 
+### Clean Architecture 
+
+- Controller - Use-case - Repositories
+- Dependency injection to facilitate testing 
+
+### Domain Driven Design - DDD
+
+We used [DDD](https://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/) to develop 
+our application, because we want the code should match the business domain. In our case, it's represented requirements specification.
+
+### 12 Factors 
+
+We used [12 factors](https://12factor.net/) methodology to develop our application.
+
+### Craftmanship 
+
+As possible, in this small app we used [software craftmanship](https://blog.octo.com/software-craftsmanship-une-culture-a-transmettre/) culture for develop our application. 
 
 ## Testing 
 
