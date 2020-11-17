@@ -1,0 +1,105 @@
+- hosts: all
+  tasks: []
+
+- hosts: web
+  vars_files:
+    - ./vars/main.yml
+    - ./vars/app-env.yml
+
+  tasks:
+    - name: Install xz
+      yum:
+        name: xz
+      become: true
+
+    - name: Download nodejs
+      command: curl -SLO "https://nodejs.org/dist/v{{NODE_VERSION}}/node-v{{NODE_VERSION}}-linux-x64.tar.xz"
+
+    - name: Permission files
+      command: chmod -R a+rwx /usr/local
+      become: true
+
+    - name: Decompressing file
+      command: tar -xJf "node-v{{NODE_VERSION}}-linux-x64.tar.xz" -C /usr/local --strip-components=1 --no-overwrite-dir
+
+    - name: Remove nodejs tar
+      command: rm -f "/node-v{{NODE_VERSION}}-linux-x64.tar.xz"
+
+    - name: Install dependencies
+      yum:
+        name: ['htop', 'git-all', 'python-devel']
+        state: present
+      become: true
+      become_user: root
+
+    - name: Clone repo
+      become: yes
+      git:
+        repo: 'https://{{gituser}}:{{gitpass}}@github.com/VincentHardouin/ING4-DevOps-Project.git'
+        dest: /home/app
+        version: master
+        force: yes
+      register: git_finished
+
+    - name: Permission app files
+      command: chmod -R a+rwx /home/app
+      become: true
+
+    - name: Install pm2 (to run our Node.js app).
+      command: npm install -g pm2
+
+    - name: Running NPM install
+      command: chdir=/home/app npm install
+      register: npm_finished
+      when: git_finished.changed
+
+    - name: Kill old daemon process
+      command: pm2 kill
+      ignore_errors: yes
+
+    - name: Start APP
+      command: pm2 start --name app --cwd /home/app /home/app/bin/www
+      environment:
+        NODE_ENV: production
+        DATABASE_REDIS_URL: "{{ DATABASE_REDIS_URL }}"
+        AUTH_SECRET: "{{ AUTH_SECRET }}"
+      ignore_errors: yes
+      when: npm_finished.changed
+
+- hosts: database
+  vars_files:
+    - ./vars/main.yml
+  tasks:
+    - name: Install remi repo
+      yum:
+        name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+      become: true
+
+    - name: Install redis
+      command: yum --enablerepo=remi install -y redis
+      become: true
+
+    - name: Add priviliges to /home
+      command: chmod 777 /home
+      become: true
+
+    - name: Copy conf to host
+      copy:
+        src: redis.conf
+        dest: /home/redis.conf
+        mode: '777'
+      register: copy_finished
+
+    - name: Add password in conf
+      command: sed -i.bak "790s/.*/requirepass {{ REDIS_PASSWORD }}/" /home/redis.conf
+      when: copy_finished.changed
+      register: replace_password
+
+    - name: Remove bak conf file
+      command: rm /home/redis.conf.bak
+      when: replace_password.changed
+
+    - name: Run redis
+      command: redis-server /home/redis.conf --daemonize yes
+
+
