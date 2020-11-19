@@ -16,6 +16,9 @@ Vagrant.configure(2) do |config|
       ansible.verbose = true
       ansible.playbook = 'playbook.yaml'
     end
+    machine.vm.provision :serverspec do |spec|
+      spec.pattern = 'test/*database_spec.rb'
+    end
   end
 
     config.vm.define "web" do |machine|
