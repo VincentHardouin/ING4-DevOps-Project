@@ -16,12 +16,19 @@ Vagrant.configure(2) do |config|
       ansible.verbose = true
       ansible.playbook = 'playbook.yaml'
     end
+    machine.vm.provision :serverspec do |spec|
+      spec.pattern = 'test/*database_spec.rb'
+    end
   end
 
-    config.vm.define "web" do |machine|
-      machine.vm.network "private_network", ip: "172.17.177.21"
-      machine.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = 'playbook.yaml'
-      end
+  config.vm.define "web" do |machine|
+    machine.vm.network "private_network", ip: "172.17.177.21"
+    machine.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = 'playbook.yaml'
     end
+    machine.vm.provision :serverspec do |spec|
+      spec.pattern = 'test/*web_spec.rb'
+    end
+  end
+
 end
