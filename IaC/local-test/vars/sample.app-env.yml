@@ -1,0 +1,4 @@
+---
+NODE_ENV: production
+AUTH_SECRET: toto
+DATABASE_REDIS_URL: redis://toto@172.17.177.22:6379
