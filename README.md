@@ -19,7 +19,7 @@ npm run configure
 *3/* Launch [Redis](https://redis.io/) database with docker 
 
 ```
-docker-compose up -d 
+docker-compose up -d redis
 ```
 
 *4/* Start the application
