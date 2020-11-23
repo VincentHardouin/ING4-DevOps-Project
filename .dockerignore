@@ -1,0 +1,15 @@
+.github
+docs
+high-level-tests
+IaC
+node_modules
+npm-debug.log
+scripts
+tests
+.eslintignore
+.eslintrc.yaml
+.gitignore
+.prettierrc
+README.md
+sample.env
+scalingo.json

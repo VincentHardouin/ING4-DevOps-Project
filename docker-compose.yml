@@ -5,3 +5,10 @@ services:
     image: redis:5.0.7-alpine
     ports:
       - "6379:6379"
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_REDIS_URL: redis://redis:6379

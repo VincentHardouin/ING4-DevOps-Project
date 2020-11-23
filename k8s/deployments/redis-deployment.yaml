@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-database-deployment
+  labels:
+    app: redis-database
+spec:
+  containers:
+  - name: redis-database
+    image: redis:5.0.7-alpine
+    ports:
+      - containerPort: 6379
+    volumeMounts:
+      - name: data
+        mountPath: /data
+        readOnly: false
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: redis-data

@@ -105,4 +105,12 @@ describe('Unit | Domain | Errors', () => {
       })
     })
   })
+
+  it('should export an MissingOrInvalidCredentialsError', () => {
+    expect(errors.MissingOrInvalidCredentialsError).to.exist
+  })
+
+  it('should export an PasswordNotMatchingError', () => {
+    expect(errors.PasswordNotMatchingError).to.exist
+  })
 })

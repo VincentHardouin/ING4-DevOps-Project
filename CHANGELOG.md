@@ -1,5 +1,14 @@
 # ING4-DevOps-Project Changelog
 
+## v0.5.0 (23/11/2020)
+
+- [#11](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/11) [FEATURE] Permettre à un utilisateur de se connecter
+- [#16](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/16) [TECH] Ajouter un docker-compose pour faire les déploiements.
+- [#14](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/14) [TECH] Mise à jour des paquets
+- [#15](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/15) [TECH] Enlever la possibilité d'utiliser le serveur comme une simple API
+- [#13](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/13) [TECH] Ajout de tests du playbook Ansible 
+- [#12](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/12) [TECH] Pouvoir déployer l'application simplement sur n'importe quel serveur (approche IaC).
+
 ## v0.4.0 (06/11/2020)
 
 - [#10](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/10) [FEATURE] Ajout de test e2e

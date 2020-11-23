@@ -1,0 +1,7 @@
+---
+gituser: your_username
+gitpass: your_password
+NODE_VERSION: 12.13.1
+REDIS_VERSION: 6.0.9
+REDIS_PASSWORD: toto
+
