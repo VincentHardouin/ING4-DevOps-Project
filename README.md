@@ -8,7 +8,7 @@ Projet de DevOps ING4
 3. [Testing](#testing)
 4. [Continuous Integration](#continuous-integration)
 5. [Continuous Delivery](#continuous-delivery)
-6. [Environment](#environment)
+6. [Environments](#environments)
 7. [Authors](#authors)
 
 ## Getting Started 
@@ -151,25 +151,23 @@ In our `package.json` :
     "postversion": "git push && git checkout master && git pull && git fetch -t && git merge dev --no-edit && git push origin master && git push --tags && git checkout dev"
 ```
 
-## Environment 
+## Environments
+
+### IaaS Approach with Kubernetes
+
+### PaaS Approach
 
 This project is deployed on [Scalingo](https://scalingo.com/) platform. 
 
-### Why use Scalingo ? 
+#### Why use Scalingo ? 
 We chose to use Scalingo as it is French PaaS using [Outscale](https://fr.outscale.com/), a French IaaS. 
 Outscale is a subsidiary of Dassault Systèmes.  
 
-Environment | Website
----|--- 
-Production | https://ing4ecedevops-production.osc-fr1.scalingo.io
-Staging | https://ing4ecedevops-staging.osc-fr1.scalingo.io
-Review App | https://ing4ecedevops-staging-pr<Number>.osc-fr1.scalingo.io
-
-### How ?
+#### How ?
 Scalingo is based on [Heroku](https://www.heroku.com/home). Both detect `package.json` at root of project, 
 you can also choose your buildpack if you prefer.
 
-### What ? 
+#### What ? 
 For Production and Staging, we just add an addon for [Redis](https://redis.io/) Database, and provide environment variable : 
 `DATABASE_REDIS_URL=` 
 
@@ -195,7 +193,15 @@ In our case we want Redis addon and provide environment variable. It looks like 
   }
 }
 ``` 
- 
+
+![Ing4-DevOps-Project-PaaS-Environment](docs/img/PaaS-environments.png)
+
+|Environment | Website|
+|:---:|---| 
+|Production | https://ing4ecedevops-production.osc-fr1.scalingo.io|
+|Integration | https://ing4ecedevops-staging.osc-fr1.scalingo.io|
+|Review App | https://ing4ecedevops-staging-pr<Number>.osc-fr1.scalingo.io|
+
 ## Authors
 |[<img src="https://avatars0.githubusercontent.com/u/44112798?s=460&u=a8f868efc70d6de5cda4be9be472ddf7b8959c8a&v=4.png=" width="150" />](https://github.com/BBnours) | [<img src="https://avatars3.githubusercontent.com/u/56677859?s=400&v=4" width="150" />](https://github.com/HugoPauthier) | [<img src="https://avatars1.githubusercontent.com/u/26384707?s=460&u=1726aa4c2fbafed2efe9062cc30cdd4fe1c09b7e&v=4" width="150" />](https://github.com/VincentHardouin)|
 |:---:|:---:|:---:|
