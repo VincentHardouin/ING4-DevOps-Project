@@ -173,3 +173,21 @@ In our case we want Redis addon and provide environment variable. It looks like 
 |:---:|:---:|:---:|
 |[Olivier Gomes](https://github.com/BBnours) | [Hugo Pauthier](https://github.com/HugoPauthier) | [Vincent Hardouin](https://github.com/VincentHardouin)|
 
+## Grading 
+
+| Subject                                                         |   Code    | Max. grade|Do|
+|:----------------------------------------------------------------|:---------:|:---------:|:---------|
+| Enriched web application with automated tests                   |   APP     |    +1     | :white_check_mark: |
+| Continuous Integration and Continuous Delivery (and Deployment) |   CICD    |    +3     | :white_check_mark: |
+| Containerisation with Docker                                    |   D       |    +1     | :white_check_mark: |
+| Orchestration with Docker Compose                               |   DC      |    +2     | :white_check_mark: |
+| Orchestration with Kubernetes	                                  |   KUB     |    +4     | :white_check_mark: |
+| Service mesh using Istio                                        |   IST     |    +2     | :white_check_mark: |
+| Infrastructure as code using Ansible                            |   IAC     |    +4     | :white_check_mark: |
+| Accurate project documentation in README.md file                |   DOC     |    +3     | :white_check_mark: |
+| Bonus : Generate automatically CHANLEGOG.md with PR title       |   BNS     |    +1     | :white_check_mark: |
+| Bonus : Add e2e tests with Cypress                              |   BNS     |    +1     | :white_check_mark: |
+| Bonus : Build docker image automatically                        |   BNS     |    +1     | :white_check_mark: |
+| Bonus : Create Healthcheck app                                  |   BNS     |    +1     | :white_check_mark: |
+| Bonus : Swagger                                                 |   BNS     |    +1     | :white_check_mark: |
+| Bonus : Load testing with Artillery.io                          |   BNS     |    +1     | :white_check_mark: |
