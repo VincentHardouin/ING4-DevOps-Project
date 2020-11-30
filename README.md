@@ -9,6 +9,7 @@ Projet de DevOps ING4
 4. [Continuous Integration](#continuous-integration)
 5. [Continuous Delivery](#continuous-delivery)
 6. [Environments](#environments)
+6. [Health Check](#health-check)
 7. [Authors](#authors)
 
 ## Getting Started 
@@ -202,6 +203,66 @@ In our case we want Redis addon and provide environment variable. It looks like 
 |Integration | https://ing4ecedevops-staging.osc-fr1.scalingo.io|
 |Review App | https://ing4ecedevops-staging-pr<Number>.osc-fr1.scalingo.io|
 
+ 
+## Health Check
+
+### Why ? 
+
+Create and deploy an application is great but if users can't use it, it's useless. 
+
+### How ? 
+
+To guarantee user access, we need to have a health check dashboard for all our environments.
+
+### What ? 
+
+For such needs, we chose [Gatus](https://github.com/TwinProduction/gatus) and deployed it on [Heroku](https://www.heroku.com/home).
+We used Heroku rather than Scalingo because it is important to have health check in another platform/server/region. Indeed, if you do not split your environment, and your cloud provider is having troubles, your health check is also impacted. 
+
+#### Deployment on Heroku
+To deploy [Gatus](https://github.com/TwinProduction/gatus) on Heroku, we created `Dockerfile` and `heroku.yml` to specify Heroku to use `Dockerfile` for building the application :
+
+Dockerfile : 
+```Dockerfile
+FROM twinproduction/gatus
+ADD config.yaml ./config/config.yaml
+```
+
+heroku.yml: 
+```yaml
+build:
+  docker:
+    web: Dockerfile
+```
+
+Also, we create config file : 
+
+```yaml
+web:
+  port: ${PORT} 
+services:
+  - name: DevOps Project PaaS - Production
+    group: core
+    url: "https://ing4ecedevops-production.osc-fr1.scalingo.io/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
+  - name: DevOps Project PaaS - Staging
+    url: "https://ing4ecedevops-staging.osc-fr1.scalingo.io/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
+```
+
+
+Now we have [Health Check on Heroku](https://ing4-devops-health-check.herokuapp.com/) : 
+
+![Healthcheck](docs/img/healt-check.png)
+
+
+ 
 ## Authors
 |[<img src="https://avatars0.githubusercontent.com/u/44112798?s=460&u=a8f868efc70d6de5cda4be9be472ddf7b8959c8a&v=4.png=" width="150" />](https://github.com/BBnours) | [<img src="https://avatars3.githubusercontent.com/u/56677859?s=400&v=4" width="150" />](https://github.com/HugoPauthier) | [<img src="https://avatars1.githubusercontent.com/u/26384707?s=460&u=1726aa4c2fbafed2efe9062cc30cdd4fe1c09b7e&v=4" width="150" />](https://github.com/VincentHardouin)|
 |:---:|:---:|:---:|
