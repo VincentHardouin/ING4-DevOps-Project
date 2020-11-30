@@ -8,6 +8,7 @@ Projet de DevOps ING4
 3. [Continuous Integration](#continuous-integration)
 4. [Continuous Delivery](#continuous-delivery)
 5. [Environment](#environment)
+5. [Authors](#authors)
 
 ## Getting Started 
 
@@ -167,3 +168,8 @@ In our case we want Redis addon and provide environment variable. It looks like 
 }
 ``` 
  
+## Authors
+|[<img src="https://avatars0.githubusercontent.com/u/44112798?s=460&u=a8f868efc70d6de5cda4be9be472ddf7b8959c8a&v=4.png=" width="150" />](https://github.com/BBnours) | [<img src="https://avatars3.githubusercontent.com/u/56677859?s=400&v=4" width="150" />](https://github.com/HugoPauthier) | [<img src="https://avatars1.githubusercontent.com/u/26384707?s=460&u=1726aa4c2fbafed2efe9062cc30cdd4fe1c09b7e&v=4" width="150" />](https://github.com/VincentHardouin)|
+|:---:|:---:|:---:|
+|[Olivier Gomes](https://github.com/BBnours) | [Hugo Pauthier](https://github.com/HugoPauthier) | [Vincent Hardouin](https://github.com/VincentHardouin)|
+
