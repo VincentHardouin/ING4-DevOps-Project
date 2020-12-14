@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: nidourah/ece-devops-project
+          image: nidourah/node-web-app
           ports:
             - containerPort: 3000
           env:
