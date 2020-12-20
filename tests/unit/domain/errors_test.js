@@ -113,4 +113,8 @@ describe('Unit | Domain | Errors', () => {
   it('should export an PasswordNotMatchingError', () => {
     expect(errors.PasswordNotMatchingError).to.exist
   })
+
+  it('should export an UserDontExistError', () => {
+    expect(errors.UserDontExistError).to.exist
+  })
 })
