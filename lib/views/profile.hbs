@@ -1,6 +1,14 @@
 <p>
   Welcome {{username}}
 </p>
+<form id="sign-up" action="{{updateUserPasswordUrl}}" class="form-horizontal form-profile" method="post" role="form" >
+    <div class="col-sm-9">
+        <input class="form-control" id="password" name="password" placeholder="Nouveau mot de passe" type="password" value="">
+    </div>
+    <div class="col-md-12 text-right">
+      <button id="btn-sign-up" class="btn btn-primary input-xlarge" type="submit"><i class="fa fa-plus"><span>Modifier mon mot de passe</span></i></button>
+    </div>
+</form>
 
 <form method="POST" action="/users/{{username}}/delete">
   <div class="form-group">
