@@ -82,4 +82,28 @@ describe('Integration | repositories | user-repository', () => {
       })
     })
   })
+
+  describe('#delete', () => {
+    it('should be able to delete user', async () => {
+      // given
+      const user = new User({ username: 'username', password: 'password' })
+      await userRepository.save(user)
+
+      // when
+      const result = await userRepository.delete(user.username)
+
+      // then
+      expect(result).to.be.true
+    })
+
+    it('should be able to return false if user does not exist', async () => {
+      // given
+      const notExistingUsername = 'abc'
+      // when
+      const result = await userRepository.delete(notExistingUsername)
+
+      // then
+      expect(result).to.be.false
+    })
+  })
 })
