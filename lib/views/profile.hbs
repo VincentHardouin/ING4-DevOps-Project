@@ -2,7 +2,7 @@
   Welcome {{username}}
 </p>
 
-<form action="/" method="delete">
+<form method="POST" action="/users/{{username}}/delete">
   <div class="form-group">
     <button id="btn-delete" class="btn btn-primary input-xlarge" type="submit">
       <i class="fa fa-minus"><span>Supprimer mon compte</span></i>
