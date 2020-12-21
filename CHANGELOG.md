@@ -1,5 +1,12 @@
 # ING4-DevOps-Project Changelog
 
+## v0.6.0 (21/12/2020)
+
+- [#20](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/20) [FEATURE] Possibilité de supprimer son compte
+- [#19](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/19) [TECH] Automatiser davantage le déploiement par k8s
+- [#17](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/17) build(deps): bump ini from 1.3.5 to 1.3.8 in /high-level-tests/e2e
+- [#18](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/18) build(deps): bump ini from 1.3.5 to 1.3.8
+
 ## v0.5.0 (23/11/2020)
 
 - [#11](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/11) [FEATURE] Permettre à un utilisateur de se connecter
