@@ -106,5 +106,4 @@ describe('Integration | repositories | user-repository', () => {
       expect(result).to.be.false
     })
   })
-
 })
