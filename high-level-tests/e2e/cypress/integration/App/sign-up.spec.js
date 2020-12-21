@@ -26,6 +26,15 @@ context('Sign Up', () => {
     // when
     cy.get('#sign-in #btn-sign-in').click()
 
+    // then
     cy.get('p').contains('Welcome test-username')
+
+    // Delete
+    // when
+    cy.get('#btn-delete').click()
+
+    cy.get('#sign-up .alert-success').contains(
+      'L‘utilisateur a bien été supprimé'
+    )
   })
 })
