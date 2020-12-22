@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: staging
+spec:
+  hosts:
+    - staging
+  http:
+    - route:
+        - destination:
+            host: staging
+            subset: v050
+          weight: 50
+        - destination:
+            host: staging
+            subset: v060
+          weight: 50
