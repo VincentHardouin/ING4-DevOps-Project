@@ -95,7 +95,7 @@ We used [12 factors](https://12factor.net/) methodology to develop our applicati
 
 ### Craftmanship 
 
-As possible, in this small app we used [software craftmanship](https://blog.octo.com/software-craftsmanship-une-culture-a-transmettre/) culture for develop our application. 
+In this small app we used [software craftmanship](https://blog.octo.com/software-craftsmanship-une-culture-a-transmettre/) culture for develop our application. 
 
 ## Testing 
 
@@ -118,8 +118,8 @@ Moreover, we used multiple types of tests :
 - **Unit Tests** : to test isolated functions, with stub and mock  
 - **Integration Tests** : to test interaction between multiple modules, for example repositories function with database connection
 - **Acceptance Tests** : to test all integration, for example API endpoint 
-- **e2e Tests**: to test features in real environment like user with [Cypress](https://www.cypress.io/). 
-- **load Tests**: to test load on our application with [Artillery.io](https://artillery.io)
+- **e2e Tests**: to test features in real environment as a user with [Cypress](https://www.cypress.io/). 
+- **load Tests**: to test the load on our application with [Artillery.io](https://artillery.io)
 
 ## Continuous Integration
 Continuous Integration is precious in development, we need to be confident about our code and new features. 
@@ -152,6 +152,39 @@ After having added Redis Database in our code and tested it, we need to run CI w
         ports:
           - 6379:6379
 ```
+
+We also added second jobs to run e2e tests : 
+
+```yaml 
+  e2e_tests:
+    name: e2e tests
+    runs-on: ubuntu-16.04
+    if: "! contains(github.event.head_commit.message, 'wip')"
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          check-latest: true
+      - run: npm ci
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start:api
+          working-directory: high-level-tests/e2e
+```
+
 Entire workflow is [here](/.github/workflows/node.js.yml).
 
 ## Continuous Delivery
@@ -189,17 +222,17 @@ Also, for Kubernetes, on Docker Hub, we used automated builds for build our new 
 
 ### IaC
 
-We thought about how build our infrastructure with IaC. 
+We thought about how to build our infrastructure with IaC. 
 
-First, we think about Node JS App and Redis on the same server, or vps, but this is not scalable.
+First, we thought about Node JS App and Redis on the same server, or vps, but this is not scalable.
 
 ![unscalable model](docs/img/unscalable-model.png)
 
-**This is not scalable** because, Redis Database, should not have the same data on each server. 
+**This is not scalable** because, each Redis Database instance don't have the same data. 
 
-Thus, we decide to build playbook dedicated in first part for Node Js App and in the second part for Redis Database. 
+Thus, we decided to build a playbook dedicated in first part to Node Js App and in the second part to Redis Database. 
 
-For that, we have created to host : `web` and `database`, with that we can scale easily `web` host.
+In that way, we have created two hosts : `web` and `database`, with that configuration we can easily scale `web` host.
 
 This can be represented by : 
 
@@ -240,15 +273,15 @@ end
 
 #### Create Dockerfile 
 
-1. First step choose based on the image : `node:12.19.1-alpine`. Why alpine ? Because image is lighter and already necessary
-tools are installed
+1. First, we decided to be based on the image : `node:12.19.1-alpine`. Why alpine ? Because this image is lighter 
+   and necessary tools are already installed.
 2. Create Workdir and copy `package.json`, and `package-lock.json`
 ```Dockerfile
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 ```
-3. As we have alpine image we need to install tools for run `npm ci`, but we removed this after installation : 
+3. As we have alpine image, we need to install tools to run `npm ci`, but this will be removed after installation : 
 ```Dockerfile
 RUN apk add --no-cache --virtual .gyp \
         python \
@@ -257,7 +290,7 @@ RUN apk add --no-cache --virtual .gyp \
     && npm ci \
     && apk del .gyp
 ```
-4. Copy app files, but just necessary thanks to `.dockerignore` : 
+4. Copy app files, but just the necessary thanks to `.dockerignore` : 
 
 Dockerfile : 
 ```Dockerfile
@@ -301,7 +334,7 @@ services:
 ```
 
 #### Kubernetes deployment 
-We choose to use same approach than IaC, with more scalability. 
+We chose to use the same approach as IaC, with more scalability. 
 
 For that, we created separated deployment for [Node App](k8s/deployments/node-app-deployment.yaml) and 
 [Redis Database](k8s/deployments/redis-deployment.yaml). 
@@ -334,10 +367,11 @@ And activate option to add automatically sidecar for container in pods with :
 kubectl label namespace default istio-injection=enabled --overwrite
 ```
 
-1. Create [DestinationRule](k8s/istio/destination-rules.yaml) for older version (v0.5.0) et new version (v0.6.0)
+1. Create [DestinationRule](k8s/istio/destination-rules.yaml) for older version (v0.5.0) and new version (v0.6.0)
 2. Create traffic shifting with [VirtualService](k8s/istio/virtual-service-50-v050-v060.yaml)
-3. For test traffic shifting with used, load testing with [Artillery.io](https://artillery.io/), and the 
-   [test created](high-level-tests/benchmarking/index.yaml)
+3. We used load testing with [Artillery.io](https://artillery.io/) with the 
+   [test created](high-level-tests/benchmarking/index.yaml) to test traffic shifting.
+   
    To show the result, we used [Grafana](https://grafana.com/) and [Kiali](https://kiali.io/) :
    
    Kiali Graph Traffic Shifting : 
