@@ -154,7 +154,14 @@ In our `package.json` :
     "postversion": "git push && git checkout master && git pull && git fetch -t && git merge dev --no-edit && git push origin master && git push --tags && git checkout dev"
 ```
 
+Also, for Kubernetes, on Docker Hub, we used automated builds for build our new image version. 
+
+![Automated Builds](docs/img/automated-builds-docker.png)
+
+
 ## Environments
+
+### IaC
 
 ### IaaS Approach with Kubernetes
 
