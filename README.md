@@ -2,6 +2,8 @@
 
 Projet de DevOps ING4
 
+![Index Page](docs/img/index-page.png)
+
 ## Table Of Contents
 1. [Getting Started](#getting-started)
 2. [Code Practice](#code-practice)
