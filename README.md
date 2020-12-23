@@ -163,6 +163,53 @@ Also, for Kubernetes, on Docker Hub, we used automated builds for build our new 
 
 ### IaC
 
+We thought about how build our infrastructure with IaC. 
+
+First, we think about Node JS App and Redis on the same server, or vps, but this is not scalable.
+
+![unscalable model](docs/img/unscalable-model.png)
+
+**This is not scalable** because, Redis Database, should not have the same data on each server. 
+
+Thus, we decide to build playbook dedicated in first part for Node Js App and in the second part for Redis Database. 
+
+For that, we have created to host : `web` and `database`, with that we can scale easily `web` host.
+
+This can be represented by : 
+
+![Scalable Model](docs/img/scalable-model.png)
+
+Our playbook can be found [here](IaC/playbook.yaml)
+
+Also, we created small tests for IaC [here](IaC/test)
+
+For web host : 
+```ruby
+describe port(3000) do
+  it { should be_listening }
+end
+
+describe command('ps aux | grep node | grep -v grep') do
+  its(:stdout) { should contain('node') }
+end
+
+describe command('ps aux | grep pm2 | grep -v grep') do
+  its(:stdout) { should contain('pm2') }
+end
+
+```
+
+For database host :
+```ruby
+describe port(6379) do
+  it { should be_listening }
+end
+
+describe process("redis-server") do
+  it { should be_running }
+end
+```
+
 ### IaaS Approach with Kubernetes
 
 ### PaaS Approach
