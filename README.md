@@ -435,7 +435,7 @@ Now we have [Health Check on Heroku](https://ing4-devops-health-check.herokuapp.
 
 ## Grading 
 
-| Subject                                                         |   Code    | Max. grade|Do|
+| Subject                                                         |   Code    | Max. grade|Done|
 |:----------------------------------------------------------------|:---------:|:---------:|:---------|
 | Enriched web application with automated tests                   |   APP     |    +1     | :white_check_mark: |
 | Continuous Integration and Continuous Delivery (and Deployment) |   CICD    |    +3     | :white_check_mark: |
