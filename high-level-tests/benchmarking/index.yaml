@@ -1,0 +1,23 @@
+config:
+  target: http://localhost
+  processor: "./my-functions.js"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+scenarios:
+  - flow:
+      - get:
+          url: "/"
+      - function: "generateRandomData"
+      - post:
+          url: "/users"
+          json:
+            username: "{{ username }}"
+            password: "{{ password }}"
+      - post:
+          url: "/token"
+          json:
+            username: "{{ username }}"
+            password: "{{ password }}"
+
+      - log: "Sent a request to /users with {{ username }}, {{ password }}"

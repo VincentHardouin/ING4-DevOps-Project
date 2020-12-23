@@ -1,8 +1,21 @@
 <p>
   Welcome {{username}}
 </p>
+<form id="update-password" action="{{updateUserPasswordUrl}}" class="form-horizontal form-profile" method="post" role="form" >
+  <h2>Changer son mot de passe</h2>
+  <div class="form-group">
+    <div class="col-sm-9">
+      <input class="form-control" name="token" type="hidden" value="{{token}}">
+      <input class="form-control" id="password" name="password" placeholder="Nouveau mot de passe" type="password" value="">
+    </div>
+  </div>
+  <div class="form-group">
+      <button id="btn-update-password" class="btn btn-primary input-xlarge" type="submit"><i class="fa fa-plus"><span>Modifier mon mot de passe</span></i></button>
+  </div>
+</form>
 
 <form method="POST" action="/users/{{username}}/delete">
+  <h2>Supprimer mon compte</h2>
   <div class="form-group">
   <input class="form-control" name="token" type="hidden" value="{{token}}">
     <button id="btn-delete" class="btn btn-primary input-xlarge" type="submit">
