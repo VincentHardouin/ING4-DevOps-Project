@@ -212,6 +212,115 @@ end
 
 ### IaaS Approach with Kubernetes
 
+#### Create Dockerfile 
+
+1. First step choose based on the image : `node:12.19.1-alpine`. Why alpine ? Because image is lighter and already necessary
+tools are installed
+2. Create Workdir and copy `package.json`, and `package-lock.json`
+```Dockerfile
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+```
+3. As we have alpine image we need to install tools for run `npm ci`, but we removed this after installation : 
+```Dockerfile
+RUN apk add --no-cache --virtual .gyp \
+        python \
+        make \
+        g++ \
+    && npm ci \
+    && apk del .gyp
+```
+4. Copy app files, but just necessary thanks to `.dockerignore` : 
+
+Dockerfile : 
+```Dockerfile
+COPY . .
+```
+5. Expose Port and command to start image :
+```Dockerfile
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
+```
+
+Entire file is available [here](Dockerfile)
+
+#### Build Dockerfile and push on Docker Hub 
+
+```shell
+docker build -t nidourah/ece-devops-project .
+```
+
+```shell
+docker push nidourah/ece-devops-project
+```
+
+#### Docker-compose for local usage 
+```yaml
+version: '3'
+
+services:
+  redis:
+    image: redis:5.0.7-alpine
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_REDIS_URL: redis://redis:6379
+```
+
+#### Kubernetes deployment 
+We choose to use same approach than IaC, with more scalability. 
+
+For that, we created separated deployment for [Node App](k8s/deployments/node-app-deployment.yaml) and 
+[Redis Database](k8s/deployments/redis-deployment.yaml). 
+
+We added 2 services, one for load balancing [Node App](k8s/services/node-app-service.yaml) and another for 
+[Redis](k8s/services/redis-service.yaml).
+
+And for Redis we also created [PersistentVolumeClaim to save data](k8s/volumes/redis-volume.yaml).
+
+Finally, with 3 simple commands we have Kubernetes deployment : 
+
+```shell
+kubectl apply -f k8s/deployments
+kubectl apply -f k8s/services
+kubectl apply -f k8s/volumes
+```
+
+Result : 
+![k8s dashboard](docs/img/k8s-dashboard.png)
+
+#### Istio 
+
+We also installed Istio with default profile : 
+```shell
+istioctl install
+```
+
+And activate option to add automatically sidecar for container in pods with : 
+```shell
+kubectl label namespace default istio-injection=enabled --overwrite
+```
+
+1. Create [DestinationRule](k8s/istio/destination-rules.yaml) for older version (v0.5.0) et new version (v0.6.0)
+2. Create traffic shifting with [VirtualService](k8s/istio/virtual-service-50-v050-v060.yaml)
+3. For test traffic shifting with used, load testing with [Artillery.io](https://artillery.io/), and the 
+   [test created](high-level-tests/benchmarking/index.yaml)
+   To show the result, we used [Grafana](https://grafana.com/) and [Kiali](https://kiali.io/) :
+   
+   Kiali Graph Traffic Shifting : 
+   ![Kiali Graph Traffic Shifting](docs/img/Kiali-traffic-shifting-loading-test.gif)
+   
+   Grafana Service WorkLoads:
+   ![Grafana Service Load](docs/img/grafana-node-app-service-load.png)
+
+   
 ### PaaS Approach
 
 This project is deployed on [Scalingo](https://scalingo.com/) platform. 
