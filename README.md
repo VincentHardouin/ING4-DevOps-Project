@@ -1,18 +1,24 @@
-# ING4-DevOps-Projet
+# ING4-DevOps-Project
 
-Projet de DevOps ING4
+Simple CRUD user API 
+
+- Sign in
+- Sign up 
+- Edit password
+- Delete account
 
 ![Index Page](docs/img/index-page.png)
 
 ## Table Of Contents
 1. [Getting Started](#getting-started)
-2. [Code Practice](#code-practice)
-3. [Testing](#testing)
-4. [Continuous Integration](#continuous-integration)
-5. [Continuous Delivery](#continuous-delivery)
-6. [Environments](#environments)
-6. [Health Check](#health-check)
-7. [Authors](#authors)
+2. [Features](#features)   
+3. [Code Practice](#code-practice)
+4. [Testing](#testing)
+5. [Continuous Integration](#continuous-integration)
+6. [Continuous Delivery](#continuous-delivery)
+7. [Environments](#environments)
+8. [Health Check](#health-check)
+9. [Authors](#authors)
 
 ## Getting Started 
 
@@ -43,6 +49,26 @@ npm start
 *5/* Access the application on http://localhost:3000
 
 *6/* Develop and add wonderful features!
+
+## Features
+### API Features
+- Create account with encrypted password stored in database
+- Sign-in and are authenticated thanks to JWT Token
+- Connected users can edit their password
+- Connected users can delete their account
+- All features are tested with Unit, Integration, Acceptance, e2e, and load tests :rocket:
+
+### Deployments 
+- IaC 
+- Kubernetes with Istio 
+- PaaS 
+
+### CI/CD 
+- GitHub Actions CI with also e2e tests
+- Automatic `CHANLEGOG.md` based on merged PR title
+- Release script with : `npm run release`
+- Automatic built image on Docker Hub 
+- Health-check application 
 
 ## Code practice 
 
