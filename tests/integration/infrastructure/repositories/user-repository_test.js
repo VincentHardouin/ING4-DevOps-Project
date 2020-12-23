@@ -3,6 +3,7 @@ const userRepository = require('../../../../lib/infrastructure/repositories/user
 const User = require('../../../../lib/domain/models/User')
 const {
   AlreadyRegisteredUsernameError,
+  UserDontExistError,
 } = require('../../../../lib/domain/errors')
 const RedisClient = require('../../../../db/RedisClient')
 
@@ -83,14 +84,50 @@ describe('Integration | repositories | user-repository', () => {
     })
   })
 
-  describe('#delete', () => {
+  describe('#updatePassword', () => {
+    context('When user is define', () => {
+      it('should update the user with new password', async () => {
+        // given
+        const expectedPassword = 'abc'
+        const user = new User({ username: 'username2', password: 'password' })
+        await userRepository.save(user)
+
+        // when
+        const result = await userRepository.updatePassword(
+          user.username,
+          expectedPassword
+        )
+
+        // then
+        expect(result.password).to.equal(expectedPassword)
+      })
+    })
+    context('When user is not define', () => {
+      it('should throw UserDontExistError', async () => {
+        // given
+        const expectedPassword = 'abc'
+        const user = new User({ username: 'michel', password: 'password' })
+
+        // when
+        const error = await catchErr(userRepository.updatePassword)(
+          user.username,
+          expectedPassword
+        )
+
+        // then
+        expect(error).to.be.instanceOf(UserDontExistError)
+      })
+    })
+  })
+
+  describe('#deleteUser', () => {
     it('should be able to delete user', async () => {
       // given
       const user = new User({ username: 'username', password: 'password' })
       await userRepository.save(user)
 
       // when
-      const result = await userRepository.delete(user.username)
+      const result = await userRepository.deleteUser(user.username)
 
       // then
       expect(result).to.be.true
@@ -100,7 +137,7 @@ describe('Integration | repositories | user-repository', () => {
       // given
       const notExistingUsername = 'abc'
       // when
-      const result = await userRepository.delete(notExistingUsername)
+      const result = await userRepository.deleteUser(notExistingUsername)
 
       // then
       expect(result).to.be.false
