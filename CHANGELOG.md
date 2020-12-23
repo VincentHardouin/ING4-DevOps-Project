@@ -1,5 +1,12 @@
 # ING4-DevOps-Project Changelog
 
+## v0.7.0 (23/12/2020)
+
+- [#22](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/22) [FEATURE] Permettre à l'utilisateur de pouvoir modifiier son mot de passe
+- [#23](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/23) [INFRA] Utiliser les tags de version plutôt que latest
+- [#9](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/9) [DOC] Ajout de nos choix dans le Readme
+- [#21](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/21) [INFRA] Ajouter des tests de charges afin de tester Istio
+
 ## v0.6.0 (21/12/2020)
 
 - [#20](https://github.com/VincentHardouin/ING4-DevOps-Project/pull/20) [FEATURE] Possibilité de supprimer son compte
