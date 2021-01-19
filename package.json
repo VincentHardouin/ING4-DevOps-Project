@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "artillery": "^1.6.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "eslint": "^7.13.0",
