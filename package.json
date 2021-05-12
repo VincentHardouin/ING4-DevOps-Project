@@ -51,7 +51,7 @@
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "node-sass-middleware": "0.11.0",
-    "redis": "^3.0.2"
+    "redis": "^3.1.1"
   },
   "devDependencies": {
     "artillery": "^1.6.1",
